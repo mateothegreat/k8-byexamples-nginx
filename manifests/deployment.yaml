@@ -2,16 +2,17 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx-deployment-${DEPLOYMENT}
 spec:
   selector:
     matchLabels:
-      k8s-app: nginx
+      k8s-app: nginx-${DEPLOYMENT}
   replicas: 1
   template: 
     metadata:
       labels:
-        k8s-app: nginx
+        k8s-app: nginx-${DEPLOYMENT}
+        deployment: ${DEPLOYMENT}
     spec:
       imagePullSecrets:
         - name: ecr    
