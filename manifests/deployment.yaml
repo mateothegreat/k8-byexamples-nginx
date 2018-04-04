@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx
+        image: 119677764340.dkr.ecr.ap-south-1.amazonaws.com/nginx
         ports:
         - containerPort: 80
