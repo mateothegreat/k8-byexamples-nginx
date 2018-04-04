@@ -13,6 +13,8 @@ spec:
       labels:
         k8s-app: nginx
     spec:
+      imagePullSecrets:
+        - name: ecr    
       containers:
       - name: nginx
         image: 119677764340.dkr.ecr.ap-south-1.amazonaws.com/nginx
