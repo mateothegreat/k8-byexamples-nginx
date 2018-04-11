@@ -1,0 +1,39 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: ${BLUE_DEPLOYMENT}
+spec:
+  selector:
+    matchLabels:
+      app: ${BLUE_DEPLOYMENT}
+  replicas: ${BLUE_REPLICAS}
+  template: 
+    metadata:
+      labels:
+        app: ${BLUE_DEPLOYMENT}
+        deployment: ${BLUE_DEPLOYMENT}
+    spec:
+      imagePullSecrets:
+        - name: ecr    
+      containers:
+      - name: ${BLUE_DEPLOYMENT}
+        # image: 119677764340.dkr.ecr.ap-south-1.amazonaws.com/nginx
+        image: ${BLUE_IMAGE}
+        ports:
+        - containerPort: ${BLUE_PORT}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${BLUE_DEPLOYMENT}
+  labels:
+    app: ${BLUE_DEPLOYMENT}
+spec:
+  type: NodePort
+  selector:
+    app: ${BLUE_DEPLOYMENT}
+  ports:
+  - name: http
+    port: ${BLUE_PORT}
+    targetPort: ${BLUE_PORT}
