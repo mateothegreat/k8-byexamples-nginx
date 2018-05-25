@@ -20,10 +20,10 @@
 ```bash
 $ kubectl apply -f manifests/
 
-deployment "nginx-deployment" configured
-service "nginx" unchanged
+deployment "nginx" created
+service "nginx" created
 
-$ kubectl get pod,svc -lk8s-app=nginx
+$ kubectl get pod,svc -lapp=nginx
 
 NAME                                  READY     STATUS    RESTARTS   AGE
 po/nginx-deployment-5ff7dc4cf-xqb8k   1/1       Running   0          13m

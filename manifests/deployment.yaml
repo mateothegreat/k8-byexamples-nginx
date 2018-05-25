@@ -1,0 +1,22 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template: 
+    metadata:
+      labels:
+        app: nginx
+        deployment: nginx
+    spec:
+      imagePullSecrets:
+        - name: ecr    
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
