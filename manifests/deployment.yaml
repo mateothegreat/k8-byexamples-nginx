@@ -11,10 +11,7 @@ spec:
     metadata:
       labels:
         app: nginx
-        deployment: nginx
-    spec:
-      imagePullSecrets:
-        - name: ecr    
+    spec:   
       containers:
       - name: nginx
         image: nginx
