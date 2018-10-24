@@ -4,11 +4,11 @@ kind: Service
 metadata:
   name: nginx
   labels:
-    k8s-app: nginx
+    app: nginx
 spec:
   type: NodePort
   selector:
-    k8s-app: nginx
+    app: nginx
   ports:
   - name: http
     port: 80
