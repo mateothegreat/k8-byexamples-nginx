@@ -1,18 +1,28 @@
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: nginx
-spec:
-  selector:
-    matchLabels:
-      app: nginx
-  template: 
-    metadata:
-      labels:
-        app: nginx
-    spec:   
-      containers:
-      - name: nginx
-        image: nginx
-        ports:
-        - containerPort: 80
+apiVersion: apps/v1                 # API Version of this Object
+kind: Deployment                    # This Object Type
+metadata:                           # Allows you to specify custom metadata
+  name: nginx                       # Specifies the name of this object
+spec:                               # The official specification matching object type schema
+  selector:                         # Label selector for pods
+    matchLabels:                    # Must match these label(s)
+      app: nginx                    # Custom label with value
+  template:                         # Template describes the pods that are created
+    metadata:                       # Standard objects metadata
+      labels:                       # Labels used to group/categorize objects
+        app: nginx                  # The name of this template
+    spec:                           # Specification of the desired behaviour of this pod
+      containers:                   # List of containers belonging to this pod (cannot be changed/updated)
+      - name: nginx                 # Name of this container
+        image: nginx                # Docker image used for this container
+        ports:                      # Port mapping(s)
+          - containerPort: 80       # Number of port to expose on this pods ip address
+        readinessProbe:             # Periodic probe of container readiness. Container will be removed from endpoints if not ready
+          tcpSocket:                # tcpSocket is the action "type" of the probe
+            port: 80                # Number of port to open a connection to
+          initialDelaySeconds: 10   # Number of seconds to wait before probing
+          periodSeconds: 10         # How often to perform probe check
+        livenessProbe:              # Periodic probe of container readiness. Container will be removed from endpoints if not "alive"
+          tcpSocket:                # tcpSocket is the action "type" of the probe
+            port: 80                # Number of port to open a connection to
+          initialDelaySeconds: 30   # Number of seconds to wait before probing
+          periodSeconds: 30         # How often to perform probe check
