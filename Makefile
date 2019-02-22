@@ -1,7 +1,7 @@
-install:  
+install:
 
-  kubectl apply -f manifests/
-  
+	kubectl apply -f manifests/
+
 delete:
 
-  kubectl delete -f manifests/
+	kubectl delete -f manifests/
